@@ -1,0 +1,40 @@
+<% @slideshowI = 0 unless defined? @slideshowI %>
+<% slideshowJ = 0 %>
+
+<div class="attachments album" id="diaporama.<%= @slideshowI %>">
+	<ul>
+	<% for attachment in attachments %>
+		<li>
+			<% if attachment.filename =~ /\.(webm|ogv|oga|ogg)$/i && attachment.readable? %>
+				<a href="<%= url_for({:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename}) %>" type="<%= attachment.content_type %>" onclick="return false;" class="icon icon-file video" id="diaporama.<%= @slideshowI %>.<%= slideshowJ %>"><input type="hidden" value="false|<%= format_time(attachment.created_on) %>|<%= attachment.description.gsub(/['"\\\x0]/,'\\\\\0') %>" /><%= h(attachment.filename) %></a>
+				<% slideshowJ += 1 %>
+			<% elsif attachment.image? && attachment.readable? %>
+				<% img = Magick::Image::read(attachment.diskfile).first %>
+				<a href="<%= url_for({:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename}) %>" type="<%= attachment.content_type %>" onclick="return false;" class="icon icon-file image-gif" id="diaporama.<%= @slideshowI %>.<%= slideshowJ %>"><input type="hidden" value="<%= img.columns %>|<%= img.rows %>|false|<%= format_time(attachment.created_on) %>|<%= attachment.description.gsub(/['"\\\x0]/,'\\\\\0') %>" /><%= h(attachment.filename) %></a>
+				<% slideshowJ += 1 %>
+			<% else %>
+				<%= link_to_attachment(attachment, :class => 'icon icon-attachment', :download => true) %>
+			<% end %>
+
+			<% if attachment.is_text? %>
+				<%= link_to(image_tag('magnifier.png'), :controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename) %>
+			<% end %>
+
+			<% unless attachment.description.blank? %>
+				<span class="description"><%= h(attachment.description) %></span>
+			<% end %>
+			<span class="size">(<%= number_to_human_size(attachment.filesize) %>)</span>
+
+			<% if options[:deletable] %>
+				<%= link_to(image_tag('delete.png'), attachment_path(attachment), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'delete', :title => l(:button_delete)) %>
+			<% end %>
+
+			<% if options[:author] %>
+				<span class="author"><%= h(attachment.author) %>, <%= format_time(attachment.created_on) %></span>
+			<% end %>
+		</li>
+	<% end %>
+	</ul>
+</div>
+
+<% @slideshowI += 1 %>

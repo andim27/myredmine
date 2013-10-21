@@ -1,0 +1,32 @@
+=== Redmine Inline Attach Screenshot ===
+
+Redmine Compatible Versions:
+    2.1.x
+	2.0.x
+	1.4.x
+	
+
+Change Log:
+
+0.4.5:
+    - Add Catalan (CA) translation.
+
+0.4.4:
+    - Fixed button placement on Wiki page, as per idoc's suggestion.
+    - Wiki support stripped from versions < 1.3 to prevent errors.
+    - Changed new translations to UTF-8 to fix errors loading them.
+
+0.4.3:
+    - Adding languges for Simplified Chinese, German, Spanish and French
+
+0.3.1:
+	- Redmine 2.0 compatability fix.
+
+Credits:
+Authors: Konstantin Zaitcev (kos@axmor.com), Sergei Vasilyev (vsv@axmor.com), Alexandr Poplavsky (poplavsky@axmor.com), StrangeWill.
+Inspired by Atlassian JIRA (http://www.atlassian.com/software/jira)
+Work sponsored by Axmor Software (http://www.axmor.com)
+
+Additional translations provided by: Paps, Raphael Kallensee, César Roldán, archonwang and amontero . 
+
+Thanks everyone!

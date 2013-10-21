@@ -1,0 +1,58 @@
+<% reply_links = authorize_for('issues', 'edit') -%>
+<% for journal in journals %>
+  <div id="change-<%= journal.id %>" class="<%= journal.css_classes %>">
+    <div id="note-<%= journal.indice %>">
+    <!--b:andreyM-->
+    <div style="border:2px black;background-color: #dcdcdc;margin:2px;padding: 2px;">
+        <h4><%= link_to "##{journal.indice}", {:anchor => "note-#{journal.indice}"}, :class => "journal-link" %>
+        <%= avatar(journal.user, :size => "24") %>
+
+        <%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %>
+        <%= format_date(journal.created_on) %>
+        <div style="float:right;text-align: right ">
+        <span style="margin:0px 5px 0px 0px"><span style="color:gray">Группа:</span> <%= User.get_group_name(journal.user.id) %></span>
+        <!--<span style="margin:0px 5px 0px 10px">Должность: <%= journal.issue.project_id %></span>-->
+        <% if not journal.user.id.blank? and not journal.issue.project_id.blank? %>
+              <%
+                 begin
+                   #posada=MemberRole.find(Member.where("user_id=#{journal.user.id} AND project_id=#{journal.issue.project_id}")[0].id).role.name
+                   posada=MemberRole.find(Member.find_by_project_id_and_user_id(journal.issue.project_id, journal.user.id).id).role.name
+                 rescue
+                   posada=""
+                 end
+              %>
+              <span style="margin:0px 10px 0px 10px"><span style="color:gray">Должность:</span> <%=posada %></span>
+        <% end %>
+        </div>
+       </h4>
+    </div>
+    <!--e:andreyM-->
+    <% if journal.details.any? %>
+    <ul class="details" style="margin: 20px;padding:5px">
+      <% details_to_strings(journal.details).each do |string| %>
+         <% if string.include?("добавлен")
+            begin
+             @href=string[/href="(.*)"/]
+             @download_str="  <a #{@href}>Скачать</a>"
+              @ico_file='zip-new-small.png'  if  (@download_str.scan(/.zip|.rar|.tz/).size >0)
+              @ico_file='file-new-small.png' if  (@download_str.scan(/.png|.PNG|.jpg|.JPG|.jpeg|.doc|.gif/).size >0)
+            rescue
+             @download_str=''
+            end
+         %>
+            <!--<p><img src="/images/zip-new-small.png"><div style="float:right"><%= string %></div></p>-->
+              <li style='background: url("/images/<%= @ico_file %>") no-repeat scroll left 0px  transparent;'>&nbsp;<%= string %>  <%= @download_str.html_safe() %></li>
+          <% else %>
+              <li style='background: url("/images/status-new-small.png") no-repeat scroll left 0px  transparent;'> &nbsp;<%= string %></li>
+          <% end %>
+      <% end %>
+    </ul>
+    <% end %>
+    <%= render_notes(issue, journal, :reply_links => reply_links) unless journal.notes.blank? %>
+
+    </div>
+  </div>
+  <%= call_hook(:view_issues_history_journal_bottom, { :journal => journal }) %>
+<% end %>
+
+<% heads_for_wiki_formatter if User.current.allowed_to?(:edit_issue_notes, issue.project) || User.current.allowed_to?(:edit_own_issue_notes, issue.project) %>

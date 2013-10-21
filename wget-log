@@ -1,0 +1,16 @@
+--2013-02-15 17:27:59--  https://github.com/stgeneral/redmine-progressive-projects-list/archive/latest.zip
+Resolving github.com... 207.97.227.239
+Connecting to github.com|207.97.227.239|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://nodeload.github.com/stgeneral/redmine-progressive-projects-list/zip/latest [following]
+--2013-02-15 17:28:00--  https://nodeload.github.com/stgeneral/redmine-progressive-projects-list/zip/latest
+Resolving nodeload.github.com... 207.97.227.252
+Connecting to nodeload.github.com|207.97.227.252|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10096 (9.9K) [application/zip]
+Saving to: `latest'
+
+     0K .........                                             100% 56.0K=0.2s
+
+2013-02-15 17:28:10 (56.0 KB/s) - `latest' saved [10096/10096]
+

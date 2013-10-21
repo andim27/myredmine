@@ -1,0 +1,64 @@
+<% if issues && issues.any? %>
+<%= form_tag({}) do %>
+  <table class="list issues">
+    <thead><tr>
+    <th>#</th>
+    <!--b:AndreyM-->
+    <% begin %>
+    <% if ! not_readed.blank?  %>
+        <th><%= l(:label_user_plural) %></th>
+    <% end %>
+    <% rescue
+       end
+    %>
+    <!--e:AndreyM-->
+    <th><%=l(:field_project)%></th>
+    <th><%=l(:field_tracker)%></th>
+    <th><%=l(:field_subject)%></th>
+    <!--b:AndreyM-->
+    <th><%=l(:field_viewed)%></th>
+    <!--e:AndreyM-->
+    </tr></thead>
+    <tbody>
+    <% for issue in issues %>
+    <tr id="issue-<%= h(issue.id) %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %>">
+      <td class="id">
+        <%= check_box_tag("ids[]", issue.id, false, :style => 'display:none;', :id => nil) %>
+        <%= link_to(h(issue.id), :controller => 'issues', :action => 'show', :id => issue) %>
+      </td>
+      <!--b:AndreyM-->
+      <% begin %>
+      <% if ! not_readed.blank?  %>
+      <td class="user">
+
+        <%= begin issue.assigned_to.name  rescue "?" end %>
+      </td>
+      <% end %>
+      <% rescue
+         end
+      %>
+
+      <!--e:AndreyM-->
+      <td class="project"><%= link_to_project(issue.project) %></td>
+      <td class="tracker"><%=h issue.tracker %></td>
+      <td class="subject">
+        <%= link_to h(truncate(issue.subject, :length => 60)), :controller => 'issues', :action => 'show', :id => issue %> (<%=h issue.status %>)
+      </td>
+      <!--b:AndreyM-->
+      <td class="id">
+        <% if issue.assigner_viewed_on.blank? %>
+             <span style="color:red"><%= l(:general_text_No) %></span>
+        <% else %>
+            <span style="color:green"><%= distance_of_date_in_words(Date.today,issue.assigner_viewed_on)+" назад" %><br>
+            <span  style="color:black"><%= format_date(issue.assigner_viewed_on) %></span>
+        <% end %>
+      </td>
+      <!--e:AndreyM-->
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>

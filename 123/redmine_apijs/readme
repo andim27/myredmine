@@ -1,0 +1,27 @@
+Extension : Apijs
+License   : GNU GPL 2 (http://www.opensource.org/licenses/gpl-2.0.php)
+Copyright : Fabrice Creuzot (luigifab) <code@luigifab.info>
+Website   : https://redmine.luigifab.info/projects/redmine/wiki/apijs
+
+
+Other licenses used by some files of this module
+- Files : gnome-*.png
+  Source : http://download.gnome.org/sources/gnome-icon-theme
+  License : GNU GPL 2.0+ (http://www.opensource.org/licenses/gpl-2.0.php)
+  Copyright : 2002-2008
+    Ulisse Perusin <uli.peru@gmail.com>
+    Riccardo Buzzotta <raozuzu@yahoo.it>
+    Josef Vybíral <cornelius@vybiral.info>
+    Hylke Bons <h.bons@student.rug.nl>
+    Ricardo González <rick@jinlabs.com>
+    Lapo Calamandrei <calamandrei@gmail.com>
+    Rodney Dawes <dobey@novell.com>
+    Luca Ferretti <elle.uca@libero.it>
+    Tuomas Kuosmanen <tigert@gimp.org>
+    Andreas Nilsson <nisses.mail@home.se>
+    Jakub Steiner <jimmac@novell.com>
+
+- Files : silk-*.png
+  Source : http://www.famfamfam.com/lab/icons/silk/
+  License : Creative Commons 2.5 By (http://creativecommons.org/licenses/by/2.5/)
+  Copyright : Mark James <mjames@gmail.com>

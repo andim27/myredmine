@@ -1,0 +1,7 @@
+<%= raw @contacts.map {|contact| {
+      'id' => contact.id,
+      'label' => contact.name,
+      'value' => contact.id
+      }
+    }.to_json
+%>

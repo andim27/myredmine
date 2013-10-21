@@ -1,0 +1,13 @@
+https://195.16.88.5/myadmin/
+
+production:
+  adapter: mysql
+
+  database: redmine
+
+  host: localhost
+
+  username: redmine
+
+  password: "4VxqHh9KXZybzdUW"
+  encoding: utf8

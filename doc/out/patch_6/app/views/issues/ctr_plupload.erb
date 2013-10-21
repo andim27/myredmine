@@ -1,0 +1,16 @@
+<!-----add---b:andreyM---->
+<fieldset><legend>Загрузка</legend>
+  <input type="radio" checked name="upload_type" id="upload_type_old"  onclick='$("#plupload_div").hide();$("#old_upload_div").show();'>Старая(единичная)</input>
+  <input type="radio" name="upload_type" id="upload_type_new" onclick='$("#plupload_div").show();$("#old_upload_div").hide();'>Новая(множественная)</input>
+</fieldset>
+<!----b:amk added last_journal_id---->
+<%= f.hidden_field :lock_version %>
+<%= hidden_field_tag 'last_journal_id', params[:last_journal_id] || @issue.last_journal_id %>
+<!----e:amk added last_journal_id---->
+<div id="old_upload_div">
+  <%= render :partial => 'attachments/form', :locals => {:container => @issue} %>
+</div>
+<div id="plupload_div" style="display:none">
+  <%= render :partial => 'attachments/form_plupload', :locals => {:container => @issue} %>
+</div>
+<!-----add---e:andreyM---->

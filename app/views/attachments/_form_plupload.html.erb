@@ -1,0 +1,38 @@
+<!--b:AndreyM-->
+<!-- Load Queue widget CSS and jQuery -->
+<style type="text/css">
+    @import url(/javascripts/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);
+</style>
+
+<!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+
+<!-- Load plupload and all it's runtimes and finally the jQuery queue widget -->
+<script type="text/javascript" src="/javascripts/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="/javascripts/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/javascripts/plupload/js/i18n/ru.js"></script>
+
+<% content_for :header_tags do %>
+    <%= javascript_include_tag 'plupload/plupload_attachments.js.erb' %>
+<% end %>
+<script type="text/javascript">
+    baseUrl="http://<%= request.env['HTTP_HOST'] %>"
+    form_token="<%= form_authenticity_token %> "
+</script>
+<!--e:AndreyM-->
+
+<% if defined?(container) && container && container.saved_attachments %>
+  <% container.saved_attachments.each_with_index do |attachment, i| %>
+    <span class="icon icon-attachment" style="display:block; line-height:1.5em;">
+      <%= h(attachment.filename) %> (<%= number_to_human_size(attachment.filesize) %>)
+      <%= hidden_field_tag "attachments[p#{i}][token]", "#{attachment.id}.#{attachment.digest}" %>
+    </span>
+  <% end %>
+<% end %>
+
+<form id="form-plupload">
+    <div id="uploader">
+ 	        <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+  	</div>
+</form>
+

@@ -1,0 +1,6 @@
+= apijs
+
+Integrate the apijs javascript library into Redmine.
+For more information, see https://redmine.luigifab.info/projects/redmine/wiki/apijs and http://www.luigifab.info/apijs.
+
+It require RMagick.

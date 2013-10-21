@@ -1,0 +1,38 @@
+Extension : Apijs
+License   : GNU GPL 2 (http://www.opensource.org/licenses/gpl-2.0.php)
+Copyright : Fabrice Creuzot (luigifab) <code@luigifab.info>
+Website   : https://redmine.luigifab.info/projects/redmine/wiki/apijs
+
+
+02/02/2013 | 4.0.0 | https://redmine.luigifab.info/versions/62
+
+ * Amélioration du contenu alternatif de la balise vidéo du dialogue vidéo
+ * Configuration de TheSlideshow via les classes CSS hoverload et cblack
+ * Ajout de la classe CSS notransition pour afficher un dialogue sans transition CSS
+ * Possibilité de verrouiller le focus sur le dialogue avec l'option : dialog.restrictNavigation
+ * Possibilité de modifier les marges des dialogues photo et vidéo avec l'option : dialog.margin
+ * Suppression des options dialog.hiddenPage, slideshow.hoverload et slideshow.hiddenPage
+ * Utilise dorénavant document.querySelector et function.bind
+ * Remplacement des line-height en « em » par des « % »
+
+ * Suppression de CSS3PIE
+ * Nouvelle procédure d'intégration
+ * Activation du mode diaporama pour les modules Magento et Redmine
+
+12/10/2012 | 3.0.1 | https://redmine.luigifab.info/versions/64
+
+ * Correction de la détection de la fin des transitions avec Firefox 16
+ * Correction de l'alignement des boutons de validation avec Chrome 22
+ * Simplification des commentaires de copyright
+
+29/07/2012 | 3.0.0 | https://redmine.luigifab.info/versions/33
+
+ * Suivi de l'upload en temps réel avec PHP 5.4 ou avec l'extension APC
+ * Possibilité de fermer la boite de dialogue lors d'un clic avec l'option : dialog.closeOnClic
+ * Mise en place de l'espace de noms apijs
+ * TheDialogue devient TheDialog
+
+ * Activation des transitions CSS sur Opera
+ * Mise à jour de CSS3PIE vers la version 1.0.0
+ * Suppression ou modification des entêtes HTTP/1.1
+ * Compatibilité avec PHP 5.4

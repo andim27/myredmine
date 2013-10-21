@@ -1,0 +1,66 @@
+
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+
+    $("#uploader").pluploadQueue({
+        // General settings
+        runtimes : 'gears,browserplus,html5',
+        url : baseUrl+'/uploads',
+        max_file_size : '10mb',
+        chunk_size : '1mb',
+        unique_names : true,
+        //headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),'authenticity_token': form_token,'Accept':'application/javascript','Content-Type':'application/octet-stream' },
+        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),'authenticity_token': form_token,'Accept':'application/javascript' },
+        multipart: true,
+        multipart_params: {
+            "upload_type" : 2
+        },
+        // Resize images on clientside if we can
+        //resize : {width : 320, height : 240, quality : 90},
+
+        // Specify what files to browse for
+        filters : [
+            {title : "Image files", extensions : "jpg,gif,png"},
+            {title : "Text files", extensions : "txt,doc,docx"},
+            {title : "Zip files", extensions : "zip"}
+        ]
+        ,
+        init: {
+            FileUploaded: function(up, file, info) {
+                            // Called when a file has finished uploading
+                            console.log('[FileUploaded] File:', file, "Info:", info);
+                tk_info=(info.response).split("token:")[1];
+                if (tk_info != undefined) {
+                    $("#issue-form").append("<input type='hidden' value='"+tk_info+"' name='pl_names[]'>")
+                }
+                console.info("token="+tk_info)
+               }
+        }
+
+// Flash settings
+//flash_swf_url : '/javascripts/plupload/js/plupload.flash.swf',
+
+
+});
+
+// Client side form validation
+$("#form-plupload").submit(function(e) {
+    var uploader = $('#uploader').pluploadQueue();
+
+    // Files in queue upload them first
+    if (uploader.files.length > 0) {
+    // When all files are uploaded submit form
+    uploader.bind('StateChanged', function() {
+    if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+    $('form')[0].submit();
+    }
+});
+
+uploader.start();
+} else {
+    alert('You must queue at least one file.');
+    }
+
+return false;
+});
+});
